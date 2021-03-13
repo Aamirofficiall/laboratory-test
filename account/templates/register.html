@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load formcss %}
+
+{% block content %}
+<div class="container" style="width: 40%;">
+    <form  method="POST" class="form" action=''>
+ 
+    
+        {% csrf_token %}
+        <div class='card p-5 mt-5'>
+            <h1 class="mb-4 mt-2 text-center">Register </h1>
+            <hr>
+            {% csrf_token %}
+            {% for field in form  %}
+            <div class="form-group">
+                <label for="exampleInputEmail1">{{ field.label_tag }}</label>
+                {{ field|addclass:"form-control" }}
+            </div>          
+            {% endfor %}
+            {% if form.errors %}
+            {{ form.errors }} <!-- display the form errors if they exist -->
+        {% endif %}
+            <button class="btn btn-outline-info form-control mt-3" type="submit">Sign Up</button>
+        </div>
+    </form>
+    
+
+
+</div>
+{% endblock content %}

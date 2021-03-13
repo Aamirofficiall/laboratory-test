@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load formcss %}
+    
+{% block content %}
+
+<div class="container" style="width: 40%;">
+    <div class='center mt-5'>
+        <hr>
+        <a class='btn btn-outline-danger btn-block' href='{% url "create-report" %}'>Submit a test</a><br>
+      
+        <a class='btn btn-outline-warning btn-block mt-4' href='{% url "complete-test-results" %}'>View Results</a> 
+      </div>
+
+
+</div>
+{% endblock content %}

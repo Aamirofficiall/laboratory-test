@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load formcss %}
+    
+{% block content %}
+
+<div class="container" >
+    {% if user == obj.user %}
+    <a class="float-right btn btn-success text-light mb-2" href='{% url "create-test" obj.id %}' >Update</a>
+      
+    {% endif %}
+
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Subscales on the ARAT</th>
+            <th scope="col">Number of items per subscale</th>
+            <th scope="col">Score ranges per subcsale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Grasp subscale</td>
+            <th>6 items</th>
+            <td>Score {{obj.grasp_score}}</td>
+
+          </tr>
+          <tr>
+            <td>Grip subscale</td>
+            <td>4 items</td>
+            <td>Score {{obj.grip_score}}</td>
+
+          </tr>
+          <tr>
+            <td>Pinch subscale</td>
+            <td>6 items</td>
+
+            <td>Score {{obj.pinch_score}}</td>
+          </tr>
+          <tr>
+
+            <td>Gross Movement subscale</td>
+            <td>3 items</td>
+            <td>Score {{obj.gross_score}}</td>
+
+
+          </tr>          
+        </tbody>
+      </table>
+
+      <div class='mt-4'>
+          <a class="float-right btn btn-info" href='{% url "complete-test-results" %}'>Finish and Go to Report List</a>
+      </div>
+
+</div>
+
+  
+{% endblock content %}

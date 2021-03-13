@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% load widget_tweaks %}
+
+<!-- END nav -->
+<div style="margin-top: 100px;"></div>
+<div class="container">
+
+    <div class="row d-md-flex ">
+        <div class="col-md-4 col-sm-12">
+            <form method='POST'>
+                {% csrf_token %}
+                <h1 style='color:rgb(107, 107, 107)'>Log In</h1>
+                {% csrf_token %}
+                {% for field in form %}
+                <p>
+                    {{ field.label_tag }}<br>
+                    {{ field | add_class:"form-control"}}
+                    {% for error in field.errors %}
+                <p style="color: red">{{ error }}</p>
+                {% endfor %}
+                </p>
+                {% endfor %}
+
+
+                <div class='mt-2'>
+                    <button type="submit" class="btn btn-primary">Log in</button>
+                    <p class='float-right mt-2'><a href="" class=' btn btn-link'>Forget Password</a> </p>
+                </div>
+                <hr>
+                <p class=' mt-2'>Don't have an account? <a href="" class=' btn btn-link'>Register</a> </p>
+
+
+            </form>
+        </div>
+
+        <div class=" offset-md-2 col-md-6 col-sm-12">
+            <img class="one-third align-self-end order-md-last img-fluid"
+                src="{% static 'images/loginPage.svg' %}" alt="">
+        </div>
+    </div>
+
+</div>
+
+</div>
+</div>
+</div>
+{% endblock content %}

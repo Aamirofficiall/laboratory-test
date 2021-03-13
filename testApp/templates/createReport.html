@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load formcss %}
+    
+{% block content %}
+
+<div class="container " >
+
+    <div class='center'>
+    <div class="card p-5" >
+
+        <form action="" method="POST">
+            {% csrf_token %}
+                {{form.patientName.label}}
+                {{form.patientName|addclass:"form-control"}}
+                {{form.raterName.label}}
+                {{form.raterName|addclass:"form-control"}}
+                {{form.date_created.label}}
+                {{form.date_created|addclass:"form-control"}}
+
+            <button class="btn btn-outline-dark mt-3">Submit</button>
+        </form>
+
+    </div>
+</div>
+
+</div>
+{% endblock content %}  

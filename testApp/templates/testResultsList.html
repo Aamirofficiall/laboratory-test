@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load formcss %}
+    
+{% block content %}
+
+<div class="container" >
+
+    {% for object in objects  %}
+    
+    <div class="col-sm-12">
+        <div class="card shadow-lg mb-3">
+          <div class="card-body">
+            <h5 class="card-title">
+                Paitent Name: <span class='text-info'> {{object.patientName}}</span>
+                <span class='float-right'>{{object.date_created}}</span>
+
+                <br>
+                Rater Name: <span class='text-info'> {{object.raterName}} </span>
+                <br>
+                Is Completed :
+                {% if object.grasp_score and object.grip_score and object.pinch_score and object.gross_score   %}
+                    <span class='text-success'> Yes </span>
+                {% else %}
+                    <span class='text-danger'> No </span>
+                {% endif %}
+
+            </h5>
+            <hr>
+            <a href="{% url 'complete-test-results' object.id %}" class="btn btn-primary">Details</a>
+  
+            {% if user == object.user %}
+              <a href="{% url 'complete-test-results' object.id %}" class="btn float-right btn-danger">Delete</a>              
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+
+</div>
+
+  
+{% endblock content %}

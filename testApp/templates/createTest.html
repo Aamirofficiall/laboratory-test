@@ -1,0 +1,396 @@
+{% extends 'base.html' %}
+{% load formcss %}
+    
+{% block content %}
+
+<div class="container " >
+
+    <style>
+    textarea, input{
+    border: none !important;
+    border-bottom: 1px solid black !important;
+    }
+    textarea:focus, input:focus{
+        outline: none;
+}
+    </style>
+   
+    <div class="card p-5" >
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="row">
+
+                <div class="col-md-6">
+                    <h3>
+                        ACTION <br>
+                        RESEARCH <br>
+                        ARM TEST <br>
+                    </h3>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="float-right">
+                        <div>
+                            Patient Name : <input type="text" value={{obj.patientName}}><br>
+                        </div>
+                        <div class='mt-2'>
+                            Rater Name &nbsp;&nbsp; : <input type="text" value={{obj.raterName}}><br>
+                        </div>                        
+                        <div class='mt-2'>
+
+                            Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="date" value='{{obj.date_created|date:"Y-m-d" }}'>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <span style='font-weight: bold;font-size: 20px;'>Instructions</span>
+                        <br>
+                        There are four subtests: Grasp,Pinch,Gross Movment.Items in each are orderd that:</p><br>
+                    <ul >
+                        <li>
+                            if the subject passes the first ,no more need to be administrated and he scores top marks for that subjects;
+                        </li>
+
+                        <li>
+                            if the subject fails the first and fails the second, he scores zero, and again no more tests need to be performed in that subsets;
+                        </li>
+                        
+                        <li>
+                            otherwise he need to complete all tasks within the subtest
+                        </li>
+                    </ul>
+
+                    <p class='mt-5 border-bottom' style='font-weight: bold;'>Activity <span class='float-right'>Score</span></p>
+                </div>
+            </div>
+
+            <!-- Grasp Start -->
+            <div class="row">
+                <div class="col-md-12">
+                    <h5>
+                        Grasp
+                        {% if obj.grasp_score %}
+                            <span class='float-right text-danger '>
+                                ({{obj.grasp_score}})
+                            </span>                        
+                        {% endif %}
+                    </h5>
+                </div>
+                <div class="col-md-12">
+                    <ol>
+                        <li>
+                            <div class="row">
+                            <div class="col-md-8">
+                                Block, wood 10 cm cube (if score = 3,total = 18 and t Grip) Pick up a 10 cm block
+                                
+                            </div>
+                            <div class="col-md-4 " style='text-align: right;'>
+                                <input type="number" name='grasp1' required >
+                            </div>
+                        </div>
+                        </li>
+                        <li>
+                            <div class="row">
+                            <div class="col-md-8">
+                                Block, wood 2.5 cm cube (If score=0, total=0 and go to Grip)
+                                Pick up 2.5 cm block
+                            </div>
+                            <div class="col-md-4 " style='text-align: right;'>
+                                <input type="number" name='grasp2' required >
+                            </div>
+                        </div>
+                        </li>
+
+                        <li>
+                            <div class="row">
+                            <div class="col-md-8">
+                                Block, wood, 5 cm cube
+                            </div>
+                            <div class="col-md-4 " style='text-align: right;'>
+                                <input type="number" name='grasp3' required >
+                            </div>
+                        </div>
+                        </li>
+
+                        <li>
+                            <div class="row">
+                            <div class="col-md-8">
+                                Block, wood 7.5 cm cube 
+                            </div>
+                            <div class="col-md-4 " style='text-align: right;'>
+                                <input type="number" name='grasp4' required >
+                            </div>
+                        </div>
+                        </li>
+
+                        <li>
+                            <div class="row">
+                            <div class="col-md-8">
+                                Ball (Cricket), 7.5 cm diameter
+                            </div>
+                            <div class="col-md-4 " style='text-align: right;'>
+                                <input type="number" name='grasp5' required >
+                            </div>
+                        </div>
+                        </li>
+
+                        <li>
+                            <div class="row">
+                            <div class="col-md-8">
+                                Stone 10 x 2.5 x 1 cm
+                            </div>
+                            <div class="col-md-4 " style='text-align: right;'>
+                                <input type="number" name='grasp6' required >
+                            </div>
+                        </div>
+                        </li>                        
+                        
+                    </ol>
+                    <ul style='margin: inherit;padding:inherit'>
+                        <li style='list-style-type: none;'>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Coefficient of reproducibility = 0.98
+                                </div>
+                            </div>
+                        </li>
+                        <li style='list-style-type: none;'>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Coefficient of scalability = 0.94
+                                </div>
+                            </div>
+                        </li>                        
+                    </ul>
+                
+            <!-- Grasp End -->
+
+            <!-- Grip Start -->
+
+                    <div class="mt-3">
+                        <h5 class='ml-3'>Grip
+                            {% if obj.grip_score %}
+                                <span class='float-right text-danger'>
+                                    ({{obj.grip_score}})
+                                </span>                        
+                            {% endif %}
+                        </h5>
+
+                        <ol>
+                            <li>
+                                <div class="row">
+                                <div class="col-md-8">
+                                    Pout water from glass to glass (If score = 3, total = 12, and go to Pinch)
+                                </div>
+                                <div class="col-md-4 " style='text-align: right;'>
+                                    <input type="number" name='grip1' required >
+                                </div>
+                            </div>
+                            </li>                        
+
+                            <li>
+                                <div class="row">
+                                <div class="col-md-8">
+                                    Tube 2.25 cm (If score = 0, total = 0 and go to Pinch)
+                                </div>
+                                <div class="col-md-4 " style='text-align: right;'>
+                                    <input type="number" name='grip2' required >
+                                </div>
+                            </div>
+                            </li> 
+            <!-- Grip End -->
+
+            <!-- Pinch Start -->
+                            <h5 class='ml-4'>
+                                Pinch
+                                {% if obj.pinch_score %}
+                                    <span class='float-right text-danger'>
+                                        ({{obj.pinch_score}})
+                                    </span>                            
+                                {% endif %}                                
+                            </h5>
+                            <ol>
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            Ball bearing, 6  mm, 3 <sup>nd</sup> finger and thumb (If score = 3 ,total = 18 and go to Grossmt)
+                                        </div>
+                                        <div class="col-md-4 " style='text-align: right;'>
+                                            <input type="number" name='pinch1' required >
+                                        </div>
+                                    </div>
+                                </li> 
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            Marble, 1.5 cm index finger and thumb (If score = 0, total = 0 and go  to Grossmt)
+                                        </div>
+                                        <div class="col-md-4 " style='text-align: right;'>
+                                            <input type="number" name='pinch2' required >
+                                        </div>
+                                    </div>
+                                </li> 
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            Ball bearing 2 <sup>nd</sup> finger and thumb
+                                        </div>
+                                        <div class="col-md-4 " style='text-align: right;'>
+                                            <input type="number" name='pinch3' required >
+                                        </div>
+                                    </div>
+                                </li>  
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            Ball bearing 1 <sup>nd</sup> finger and thumb
+                                        </div>
+                                        <div class="col-md-4 " style='text-align: right;'>
+                                            <input type="number" name='pinch4' required >
+                                        </div>
+                                    </div>
+                                </li>  
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            Marble 3 <sup>nd</sup> finger and thumb
+                                        </div>
+                                        <div class="col-md-4 " style='text-align: right;'>
+                                            <input type="number" name='pinch5' required >
+                                        </div>
+                                    </div>
+                                </li>       
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            Marble 2 <sup>nd</sup> finger and thumb
+                                        </div>
+                                        <div class="col-md-4 " style='text-align: right;'>
+                                            <input type="number" name='pinch6' required >
+                                        </div>
+                                    </div>
+                                </li>  
+                                
+                                
+                            </ol>
+                            <ul style='margin: inherit;padding:10px 0px 0px 20px'>
+
+                                <li style='list-style-type: none;'>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            Coefficient of reproducibility = 0.98
+                                        </div>
+                                    </div>
+                                </li>
+                                <li style='list-style-type: none;'>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            Coefficient of scalability = 0.94
+                                        </div>
+                                    </div>
+                                </li>   
+                                
+                            </ul>
+
+            <!-- Pinch End -->
+
+            <!-- Grossmt (Gross Movement)  Start -->
+                            <h5 class='ml-3'>
+                                Grossmt (Gross Movement)
+                                {% if obj.gross_score %}
+                                    <span class='float-right text-danger'>
+                                        ({{obj.gross_score}})
+                                    </span>                            
+                                {% endif %}                                    
+                            </h5>
+                            <ol>
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            Place hand behind head (If score = 3, total = 9  and finish)
+                                        </div>
+                                        <div class="col-md-4 " style='text-align: right;'>
+                                            <input type="number" name='gross1' required >
+                                        </div>
+                                    </div>
+                                </li> 
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            (If score = 0, total = 0 and finish)
+                                        </div>
+                                        <div class="col-md-4 " style='text-align: right;'>
+                                            <input type="number" name='gross2' required >
+                                        </div>
+                                    </div>
+                                </li>    
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            Place hand on top of head
+                                        </div>
+                                        <div class="col-md-4 " style='text-align: right;'>
+                                            <input type="number" name='gross3' required >
+                                        </div>
+                                    </div>
+                                </li>    
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            Hand to mouth
+                                        </div>
+                                        <div class="col-md-4 " style='text-align: right;'>
+                                            <input type="number" name='gross4' required >
+                                        </div>
+                                    </div>
+                                </li>                                    
+                                
+
+                            </ol>
+                            <ul style='margin: inherit;padding:10px 0px 0px 20px'>
+
+                                <li style='list-style-type: none;'>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            Coefficient of reproducibility = 0.98
+                                        </div>
+                                    </div>
+                                </li>
+                                <li style='list-style-type: none;'>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            Coefficient of scalability = 0.97
+                                        </div>
+                                    </div>
+                                </li>   
+                                
+                            </ul>
+            <!-- Grossmt (Gross Movement) End -->
+
+                        </ol>
+                        
+
+
+                    </div>
+
+                </div>
+           
+
+            </div>
+
+        
+           
+            <button class="btn btn-outline-dark mt-3">Quit</button>
+            <button class="btn btn-outline-info mt-3 float-right">Complete Test</button>
+        </form>
+
+    </div>
+
+</div>
+{% endblock content %}  

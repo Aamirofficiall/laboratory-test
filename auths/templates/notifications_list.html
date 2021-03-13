@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<!-- =======================================Page Heading================================================== -->
+	<div class="container mb-5" >
+	
+		<div class="notificationList">
+	
+			<div class="notifyHeader border-bottom">
+				<h1>Notification
+					<span class='float-right'>
+						<a  onclick="MarkAsRead(this)" style="font-size: medium;">Mark as read</a>
+					</span>
+				</h1>
+			</div>
+	
+			<div class="notifciationBody">
+				<!-- notification Items Start -->
+				{% for notice in object_list %}
+
+					<ul>
+						<li style='list-style-type: none;'>
+							<div class='mt-3'>
+								<span class='notificationDays'>Today</span><br>
+								<li style="font-size: 22px;color:black">
+									{{ notice.verb }} <br>
+								</li>
+								<span class='notificationTime'>{{ notice.timestamp }}</span>
+							</div>
+						</li>
+					</ul>
+
+				<!-- notification Items End -->
+	
+					{% empty %}
+					<ul>
+						<li style='list-style-type: none;'>
+							<div class='mt-3'>							
+								<li style="font-size: 22px;color:black;list-style-type: none;">
+									<h3 class='text-center'>All Clear</h3>
+								</li>
+							</div>
+						</li>	
+					</ul>
+					{% endfor %}
+			</div>
+	
+	
+		</div>
+
+	</div>
+
+<script>
+	function MarkAsRead(x){
+					$.ajax({
+							url: 'http://127.0.0.1:8000/inbox/notifications/mark-all-as-read/',
+					
+							dataType: 'json',
+							success: function (data) {
+								console.log('okkk')
+							},
+							error:function(data)
+							{
+								console.log('not ok')
+							}
+							});
+
+			};
+</script>
+
+<!-- Content / End -->
+{% endblock content%}
